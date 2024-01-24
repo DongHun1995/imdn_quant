@@ -73,6 +73,7 @@ for imname in filelist:
         torch.cuda.synchronize()
         time_list[i] = start.elapsed_time(end)  # milliseconds
 
+    
     out_img = utils.tensor2np(out.detach()[0])
     crop_size = opt.upscale_factor
     cropped_sr_img = utils.shave(out_img, crop_size)
@@ -96,5 +97,8 @@ for imname in filelist:
     cv2.imwrite(output_folder, out_img[:, :, [2, 1, 0]])
     i += 1
 
+peak_memory = torch.cuda.max_memory_allocated(device=0) / (1024 ** 2)
 
-print("Mean PSNR: {}, SSIM: {}, TIME: {} ms".format(np.mean(psnr_list), np.mean(ssim_list), np.mean(time_list)))
+
+print("Mean PSNR: {}, SSIM: {}, TIME: {} ms, Peak Memory: {}MB".format(np.mean(psnr_list), 
+                                                                       np.mean(ssim_list), np.mean(time_list), peak_memory))
