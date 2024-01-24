@@ -21,7 +21,6 @@ pip install pytorch scikit-image==0.16.2 opencv-python==3.4.8.29
 #IMDN model is devloped in 2019, so you need old version scikit-image, opencv-python libraray
 ```
 
-Pytorch 1.1
 * Runing testing:
 ```bash
 # Set5 x2 IMDN
